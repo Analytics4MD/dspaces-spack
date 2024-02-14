@@ -16,6 +16,7 @@ class Dataspaces(CMakePackage):
     maintainers = ['pradsubedi', 'pdavis']
 
     version('master', branch='master', submodules=True)
+    version('2.2.0', tag='v2.2.0', submodules=True)
     version('netcdf', branch='netcdf', submodules=True)
 
     variant('pybind', default=True, description='build Python bindings')
@@ -39,6 +40,7 @@ class Dataspaces(CMakePackage):
         extra_args = ['-DCMAKE_C_COMPILER=%s' % self.spec['mpi'].mpicc]
         extra_args.extend(['-DCMAKE_CXX_COMPILER=%s' % self.spec['mpi'].mpicxx])
         extra_args.extend(['-DENABLE_TESTS=ON'])
-        extra_args.extend(['-DENABLE_EXAMPLES=ON'])
+        extra_args.append(self.define_from_variant("ENABLE_EXAMPLES", "examples"))
+        extra_args.append(self.define_from_variant("DSPACES_PYTHON_BINDINGS", "pybind"))
         return extra_args
 
