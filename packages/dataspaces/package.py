@@ -17,10 +17,13 @@ class Dataspaces(CMakePackage):
 
     version('master', branch='master', submodules=True)
     version('2.2.0', tag='v2.2.0', submodules=True)
+    version('2.1.1', tag='v2.1.1', submodules=True)
+    version('2.1.0', tag='v2.1.0', submodules=True)
     version('netcdf', branch='netcdf', submodules=True)
 
-    variant('pybind', default=True, description='build Python bindings')
-    variant('examples', default=True, description='build dspaces examples')
+    # "master" and "netcdf" will both be considered higher version "numbers" than 2.2.0
+    variant('pybind', default=True, description='build Python bindings', when="@2.2.0:)
+    variant('examples', default=True, description='build dspaces examples', when="@2.2.0:")
 
     depends_on('mpi')
     depends_on('py-numpy', when='+pybind')
