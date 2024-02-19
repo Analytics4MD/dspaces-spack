@@ -22,7 +22,7 @@ class Dataspaces(CMakePackage):
     version('netcdf', branch='netcdf', submodules=True)
 
     # "master" and "netcdf" will both be considered higher version "numbers" than 2.2.0
-    variant('pybind', default=True, description='build Python bindings', when="@2.2.0:)
+    variant('pybind', default=True, description='build Python bindings', when="@2.2.0:")
     variant('examples', default=True, description='build dspaces examples', when="@2.2.0:")
 
     depends_on('mpi')
